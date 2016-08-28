@@ -144,6 +144,7 @@ public class DispatcherServlet extends HttpServlet {
 			outputStream = response.getOutputStream();
 			while ((length = fis.read(buff)) != -1) {
 				outputStream.write(buff, 0, length);
+				outputStream.flush();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
