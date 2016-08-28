@@ -233,4 +233,8 @@ public class DateUtils {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd");
 		return Integer.parseInt(simpleDateFormat.format(time));
 	}
+
+	public static String current(String string) {
+		return getFormatString(new Date(), string);
+	}
 }

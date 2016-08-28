@@ -91,7 +91,7 @@ public class UploadHelper {
 			l.error("create param failure", e);
 			throw new RuntimeException(e);
 		}
-		return new Param(formList, fileList);
+		return new Param(formList, fileList, request);
 	}
 
 	/**

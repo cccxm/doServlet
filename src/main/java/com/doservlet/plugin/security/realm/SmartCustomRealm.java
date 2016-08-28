@@ -68,5 +68,4 @@ public class SmartCustomRealm extends AuthorizingRealm {
 		authenticationInfo.setCredentials(password);
 		return authenticationInfo;
 	}
-
 }

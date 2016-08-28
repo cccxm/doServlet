@@ -15,8 +15,8 @@ public final class SecurityHelper {
 		if (currentUser != null) {
 			UsernamePasswordToken token = new UsernamePasswordToken(username,
 					password);
-			System.out.println(token);//TODO
 			try {
+				token.setRememberMe(true);
 				currentUser.login(token);
 			} catch (Exception e) {
 				l.error("login failure", e);

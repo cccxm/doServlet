@@ -20,6 +20,7 @@ public interface ConfigConstant {
 
 	String APP_UPLOAD_LIMIT = "smart.framework.app.upload_limit";
 
+	String PLUGIN_SECURITY_SSO = "smart.plugin.security.sso";
 	String PLUGIN_SECURITY_REALMS = "smart.plugin.security.realms";
 	String PLUGIN_SECURITY_CUSTOM_CLASS = "smart.plugin.security.custom.class";
 }

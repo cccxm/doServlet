@@ -23,7 +23,7 @@ public class RequestHelper {
 		List<FormParam> formParamList = new ArrayList<FormParam>();
 		formParamList.addAll(parseParameterNames(request));
 		formParamList.addAll(parseInputStream(request));
-		return new Param(formParamList);
+		return new Param(formParamList, request);
 	}
 
 	private static List<FormParam> parseParameterNames(

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.map.HashedMap;
 
@@ -22,16 +24,20 @@ public class Param {
 	private List<FileParam> fileParamList;
 	private Map<String, Object> paramMap;
 	private Map<String, List<FileParam>> fileMap;
+	private HttpServletRequest request;
 
-	public Param(List<FormParam> formParamList) {
+	public Param(List<FormParam> formParamList, HttpServletRequest request) {
 		super();
 		this.formParamList = formParamList;
+		this.request = request;
 	}
 
-	public Param(List<FormParam> formParamList, List<FileParam> fileParamList) {
+	public Param(List<FormParam> formParamList, List<FileParam> fileParamList,
+			HttpServletRequest request) {
 		super();
 		this.formParamList = formParamList;
 		this.fileParamList = fileParamList;
+		this.request = request;
 	}
 
 	public Map<String, Object> getFieldMap() {
@@ -51,6 +57,10 @@ public class Param {
 			}
 		}
 		return paramMap;
+	}
+
+	public HttpServletRequest getRequest() {
+		return request;
 	}
 
 	public Map<String, List<FileParam>> getFileMap() {
