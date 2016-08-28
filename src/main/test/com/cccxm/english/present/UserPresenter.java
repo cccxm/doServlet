@@ -58,6 +58,8 @@ public class UserPresenter implements UserContract.IUserPresenter {
 
 	public String saveUser(Param param, String username, String password) {
 		HttpSession session = param.getRequest().getSession(true);
+		session.invalidate();
+		session = param.getRequest().getSession(true);
 		session.setAttribute("username", username);
 		session.setAttribute("password", password);
 		return session.getId();
