@@ -110,8 +110,8 @@ public class DatabaseHelper {
 	 * @param sql
 	 * @param params
 	 */
-	public static void insert(String sql, Object... params) {
-		update(sql, params);
+	public static int insert(String sql, Object... params) {
+		return update(sql, params);
 	}
 
 	/**

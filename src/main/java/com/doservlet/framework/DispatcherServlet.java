@@ -11,7 +11,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.ServletRegistration;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,7 +33,7 @@ import com.doservlet.framework.util.JsonUtil;
 import com.doservlet.framework.util.ReflectionUtils;
 import com.doservlet.framework.util.Regex;
 
-@WebServlet(urlPatterns = "/*", loadOnStartup = 0)
+//@WebServlet(urlPatterns = "/*", loadOnStartup = 0)
 public class DispatcherServlet extends HttpServlet {
 	/**
 	 * 

@@ -102,6 +102,14 @@ public class Regex {
 		return str == null;
 	}
 
+	public static boolean allIsNull(String... str) {
+		for (String s : str) {
+			if (!isNull(s))
+				return false;
+		}
+		return true;
+	}
+
 	/**
 	 * 判断字符串是否为空字符串
 	 * 
@@ -110,6 +118,14 @@ public class Regex {
 	 */
 	public static boolean isEmpty(String str) {
 		return isNull(str) ? true : str.length() == 0;
+	}
+
+	public static boolean allIsEmpty(String... str) {
+		for (String s : str) {
+			if (!isEmpty(s))
+				return false;
+		}
+		return true;
 	}
 
 	/**
@@ -122,8 +138,24 @@ public class Regex {
 		return isEmpty(str) ? true : str.trim().length() == 0;
 	}
 
+	public static boolean allIsBlank(String... str) {
+		for (String s : str) {
+			if (!isBlank(s))
+				return false;
+		}
+		return true;
+	}
+
 	public static boolean isNotBlank(String str) {
 		return !isBlank(str);
+	}
+
+	public static boolean allIsNotBlank(String... str) {
+		for (String s : str) {
+			if (!isNotBlank(s))
+				return false;
+		}
+		return true;
 	}
 
 	/**
