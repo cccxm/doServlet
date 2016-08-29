@@ -2,6 +2,7 @@ package com.cccxm.english.present;
 
 import javax.servlet.http.HttpSession;
 
+import com.cccxm.english.bean.UserBean;
 import com.cccxm.english.contract.UserContract;
 import com.cccxm.english.contract.UserContract.IUserModel;
 import com.cccxm.english.contract.UserContract.IUserView;
@@ -33,7 +34,7 @@ public class UserPresenter implements UserContract.IUserPresenter {
 				model.setRole(i, 1);
 				boolean success = model.login(username, password);
 				if (success) {
-					return view.sessionId(saveUser(param, username, password));
+					return view.success(createUser(param, username, password));
 				} else {
 					return view.error("用户名或密码错误");
 				}
@@ -49,7 +50,7 @@ public class UserPresenter implements UserContract.IUserPresenter {
 		} else {
 			boolean flag = model.login(username, password);
 			if (flag) {
-				return view.sessionId(saveUser(param, username, password));
+				return view.success(createUser(param, username, password));
 			} else {
 				return view.error("用户名或密码错误");
 			}
@@ -65,4 +66,10 @@ public class UserPresenter implements UserContract.IUserPresenter {
 		return session.getId();
 	}
 
+	private UserBean createUser(Param param, String username, String password) {
+		UserBean bean = new UserBean();
+		bean.setUsername(username);
+		bean.setToken(saveUser(param, username, password));
+		return bean;
+	}
 }

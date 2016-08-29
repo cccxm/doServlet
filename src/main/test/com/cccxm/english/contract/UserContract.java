@@ -1,5 +1,6 @@
 package com.cccxm.english.contract;
 
+import com.cccxm.english.bean.UserBean;
 import com.doservlet.framework.bean.Data;
 import com.doservlet.framework.bean.Param;
 
@@ -11,7 +12,7 @@ public interface UserContract {
 
 		Data error(String message);
 
-		Data sessionId(String token);
+		Data success(UserBean bean);
 	}
 
 	public static interface IUserPresenter {

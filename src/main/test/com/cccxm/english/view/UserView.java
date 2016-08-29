@@ -1,5 +1,6 @@
 package com.cccxm.english.view;
 
+import com.cccxm.english.bean.UserBean;
 import com.cccxm.english.contract.UserContract;
 import com.cccxm.english.contract.UserContract.IUserPresenter;
 import com.cccxm.english.model.UserModel;
@@ -12,13 +13,13 @@ import com.doservlet.framework.bean.Param;
 
 @Controller
 public class UserView implements UserContract.IUserView {
-	@Action("get:/register")
+	@Action("post:/register")
 	public Data register(Param param) {
 		IUserPresenter presenter = new UserPresenter(new UserModel(), this);
 		return presenter.register(param);
 	}
 
-	@Action("get:/login")
+	@Action("post:/login")
 	public Data login(Param param) {
 		IUserPresenter presenter = new UserPresenter(new UserModel(), this);
 		return presenter.login(param);
@@ -31,10 +32,10 @@ public class UserView implements UserContract.IUserView {
 		return new Data(res);
 	}
 
-	public Data sessionId(String sessionId) {
-		HttpResponse<String> res = new HttpResponse<String>();
+	public Data success(UserBean bean) {
+		HttpResponse<UserBean> res = new HttpResponse<UserBean>();
 		res.setSuccess(true);
-		res.setMessage(sessionId);
+		res.setData(bean);
 		return new Data(res);
 	}
 }
