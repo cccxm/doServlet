@@ -14,12 +14,7 @@ public class UserModel implements UserContract.IUserModel {
 	}
 
 	public boolean login(String username, String password) {
-		try {
-			SecurityHelper.login(username, password);
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
+		return SecurityHelper.login(username, password);
 	}
 
 	public void setRole(int user_id, int role_id) {

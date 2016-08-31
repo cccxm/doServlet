@@ -10,19 +10,20 @@ public final class SecurityHelper {
 	private static final Logger l = LoggerFactory
 			.getLogger(SecurityHelper.class);
 
-	public static void login(String username, String password) {
+	public static boolean login(String username, String password) {
 		Subject currentUser = SecurityUtils.getSubject();
 		if (currentUser != null) {
 			UsernamePasswordToken token = new UsernamePasswordToken(username,
-					password);
+					password, true);
 			try {
-				token.setRememberMe(true);
 				currentUser.login(token);
+				return true;
 			} catch (Exception e) {
 				l.error("login failure", e);
-				throw new RuntimeException(e);
+				return false;
 			}
 		}
+		return true;
 	}
 
 	public static void logout() {

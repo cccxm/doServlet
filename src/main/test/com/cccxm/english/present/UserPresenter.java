@@ -20,8 +20,14 @@ public class UserPresenter implements UserContract.IUserPresenter {
 	}
 
 	public Data register(Param param) {
-		String username = param.getString("username");
-		String password = param.getString("password");
+		String username = null;
+		String password = null;
+		try {
+			username = param.getString("username");
+			password = param.getString("password");
+		} catch (Exception e) {
+			return view.error("参数错误");
+		}
 		if (!Regex.isPhone(username)) {
 			return view.error("用户名必须是正确的手机号码");
 		} else if (!Regex.password(password)) {
@@ -43,8 +49,14 @@ public class UserPresenter implements UserContract.IUserPresenter {
 	}
 
 	public Data login(Param param) {
-		String username = param.getString("username");
-		String password = param.getString("password");
+		String username = null;
+		String password = null;
+		try {
+			username = param.getString("username");
+			password = param.getString("password");
+		} catch (Exception e) {
+			view.error("参数错误");
+		}
 		if (!Regex.isPhone(username) || !Regex.password(password)) {
 			return view.error("用户名或密码格式错误");
 		} else {

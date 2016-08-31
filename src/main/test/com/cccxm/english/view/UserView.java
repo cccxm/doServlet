@@ -1,5 +1,7 @@
 package com.cccxm.english.view;
 
+import javax.servlet.http.HttpSession;
+
 import com.cccxm.english.bean.UserBean;
 import com.cccxm.english.contract.UserContract;
 import com.cccxm.english.contract.UserContract.IUserPresenter;
@@ -23,6 +25,22 @@ public class UserView implements UserContract.IUserView {
 	public Data login(Param param) {
 		IUserPresenter presenter = new UserPresenter(new UserModel(), this);
 		return presenter.login(param);
+	}
+
+	@Action("get:/login")
+	public Data loginGet(Param param) {
+		IUserPresenter presenter = new UserPresenter(new UserModel(), this);
+		return presenter.login(param);
+	}
+
+	@Action("get:/")
+	public Data noLogin(Param param) {
+		HttpSession session = param.getRequest().getSession(false);
+		if(session==null){
+			return error("logout");
+		}else{
+			return error("login");
+		}
 	}
 
 	public Data error(String message) {

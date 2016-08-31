@@ -115,6 +115,8 @@ public class DispatcherServlet extends HttpServlet {
 				} else if (result instanceof DownloadFile) {
 					handleFileResult((DownloadFile) result, request, response);
 				}
+			}else{
+				l.error("no path");
 			}
 		} finally {
 			ServletHelper.destory();
