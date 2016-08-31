@@ -6,6 +6,7 @@ import com.cccxm.english.bean.UserBean;
 import com.cccxm.english.contract.UserContract;
 import com.cccxm.english.contract.UserContract.IUserModel;
 import com.cccxm.english.contract.UserContract.IUserView;
+import com.cccxm.english.security.TokenUtils;
 import com.doservlet.framework.bean.Data;
 import com.doservlet.framework.bean.Param;
 import com.doservlet.framework.util.Regex;
@@ -70,17 +71,19 @@ public class UserPresenter implements UserContract.IUserPresenter {
 	}
 
 	public String saveUser(Param param, String username, String password) {
-		HttpSession session = param.getRequest().getSession(true);
-		session.invalidate();
+		HttpSession session = param.getRequest().getSession(false);
+		if (session != null)
+			session.invalidate();
 		session = param.getRequest().getSession(true);
 		session.setAttribute("username", username);
 		session.setAttribute("password", password);
-		return session.getId();
+		return TokenUtils.buildToken(session);
 	}
 
 	private UserBean createUser(Param param, String username, String password) {
 		UserBean bean = new UserBean();
 		bean.setUsername(username);
+		bean.setSid(param.getRequest().getSession(false).getId());
 		bean.setToken(saveUser(param, username, password));
 		return bean;
 	}

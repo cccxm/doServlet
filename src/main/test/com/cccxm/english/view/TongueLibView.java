@@ -18,7 +18,6 @@ public class TongueLibView implements ITongueLibView {
 
 	@Action("get:/user/lib/tongue/list")
 	public Data getList(Param param) {
-		System.out.println("====in====");// TODO
 		ITongueLibPresent presenter = new TongueLibPresenter(
 				new TongueLibModel(), this);
 		return presenter.getList(param);

@@ -14,8 +14,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.doservlet.plugin.security.SecurityHelper;
-
 public class AppSecurityFilter implements Filter {
 	private static final Logger l = LoggerFactory
 			.getLogger(AppSecurityFilter.class);
@@ -26,25 +24,26 @@ public class AppSecurityFilter implements Filter {
 
 	public void doFilter(ServletRequest iRequest, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		chain.doFilter(iRequest, response);
-//		try {
-//			HttpServletRequest request = (HttpServletRequest) iRequest;
-//			HttpSession session = request.getSession(false);
-//			if (session == null) {
-//				request.getRequestDispatcher("/").forward(iRequest, response);
-//			} else {
-//				String username = (String) session.getAttribute("username");
-//				String password = (String) session.getAttribute("password");
-//				if (SecurityHelper.login(username, password)) {
-//					chain.doFilter(request, response);
-//				} else {
-//					request.getRequestDispatcher("/").forward(iRequest,
-//							response);
-//				}
-//			}
-//		} catch (Exception e) {
-//			l.error(e.getMessage());
-//		} 
+		try {
+			HttpServletRequest request = (HttpServletRequest) iRequest;
+			HttpSession session = request.getSession(false);
+			if (session == null) {
+				request.getRequestDispatcher("/").forward(iRequest, response);
+			} else {
+				String token = request.getParameter("token");
+				if (token == null) {
+					request.getRequestDispatcher("/").forward(iRequest,
+							response);
+				} else if (TokenUtils.autch(session, token)) {
+					chain.doFilter(request, response);
+				} else {
+					request.getRequestDispatcher("/").forward(iRequest,
+							response);
+				}
+			}
+		} catch (Exception e) {
+			l.error(e.getMessage());
+		}
 	}
 
 	public void destroy() {

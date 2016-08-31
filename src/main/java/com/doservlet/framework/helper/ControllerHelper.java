@@ -1,7 +1,6 @@
 package com.doservlet.framework.helper;
 
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -28,9 +27,8 @@ public class ControllerHelper {
 							// 获取url映射规则
 							Action action = method.getAnnotation(Action.class);
 							String mapping = action.value();
-							if (mapping.matches("\\w+:/\\w*")) {
+							if (mapping.matches("\\w+:/[^\\s]*")) {
 								String[] split = mapping.split(":");
-								System.out.println(Arrays.toString(split));//TODO
 								if (ArrayUtils.isNotEmpty(split)
 										&& split.length == 2) {
 									// 获得请求方法与请求路径

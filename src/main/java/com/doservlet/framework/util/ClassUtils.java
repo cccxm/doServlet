@@ -68,7 +68,7 @@ public final class ClassUtils {
 		Set<Class<?>> classes = new HashSet<Class<?>>();
 		try {
 			Enumeration<URL> urls = getClassLoader().getResources(
-					packageName.replaceAll(".", "/"));
+					packageName.replaceAll("[.]", "/"));
 			URL url;
 			String protocol, packagePath;
 			while (urls.hasMoreElements()) {
@@ -77,7 +77,7 @@ public final class ClassUtils {
 					protocol = url.getProtocol();
 					if (protocol.equals("file")) {
 						packagePath = url.getPath().replaceAll("%20", " ");
-						addClass(classes, packagePath, "");
+						addClass(classes, packagePath, packageName);
 					} else if (protocol.equals("jar")) {
 						JarURLConnection jarURLConnection = (JarURLConnection) url
 								.openConnection();
