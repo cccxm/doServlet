@@ -1,7 +1,10 @@
 package com.cccxm.english.present;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import com.cccxm.english.bean.User;
 import com.cccxm.english.bean.UserBean;
 import com.cccxm.english.contract.UserContract;
 import com.cccxm.english.contract.UserContract.IUserModel;
@@ -39,11 +42,11 @@ public class UserPresenter implements UserContract.IUserPresenter {
 				return view.error("该号码已经注册");
 			} else {
 				model.setRole(i, 1);
-				boolean success = model.login(username, password);
-				if (success) {
-					return view.success(createUser(param, username, password));
-				} else {
+				List<User> login = model.login(username, password);
+				if (login == null || login.size() != 1) {
 					return view.error("用户名或密码错误");
+				} else {
+					return view.success(createUser(param, login.get(0)));
 				}
 			}
 		}
@@ -61,11 +64,11 @@ public class UserPresenter implements UserContract.IUserPresenter {
 		if (!Regex.isPhone(username) || !Regex.password(password)) {
 			return view.error("用户名或密码格式错误");
 		} else {
-			boolean flag = model.login(username, password);
-			if (flag) {
-				return view.success(createUser(param, username, password));
-			} else {
+			List<User> login = model.login(username, password);
+			if (login == null || login.size() != 1) {
 				return view.error("用户名或密码错误");
+			} else {
+				return view.success(createUser(param, login.get(0)));
 			}
 		}
 	}
@@ -80,11 +83,12 @@ public class UserPresenter implements UserContract.IUserPresenter {
 		return TokenUtils.buildToken(session);
 	}
 
-	private UserBean createUser(Param param, String username, String password) {
+	private UserBean createUser(Param param, User user) {
 		UserBean bean = new UserBean();
-		bean.setUsername(username);
+		bean.setUsername(user.getUsername());
 		bean.setSid(param.getRequest().getSession(false).getId());
-		bean.setToken(saveUser(param, username, password));
+		bean.setToken(saveUser(param, user.getUsername(), user.getPassword()));
+		bean.setScore(user.getScore());
 		return bean;
 	}
 }

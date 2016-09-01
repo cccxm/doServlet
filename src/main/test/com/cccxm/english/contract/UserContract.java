@@ -1,5 +1,8 @@
 package com.cccxm.english.contract;
 
+import java.util.List;
+
+import com.cccxm.english.bean.User;
 import com.cccxm.english.bean.UserBean;
 import com.doservlet.framework.bean.Data;
 import com.doservlet.framework.bean.Param;
@@ -28,7 +31,7 @@ public interface UserContract {
 
 		void setRole(int user_id, int role_id);
 
-		boolean login(String username, String password);
+		List<User> login(String username, String password);
 	}
 
 }

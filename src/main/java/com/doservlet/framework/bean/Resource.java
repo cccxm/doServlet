@@ -2,13 +2,13 @@ package com.doservlet.framework.bean;
 
 import java.io.File;
 
-public class DownloadFile {
+public class Resource {
 	private File file;
 	private String fileName;
 	private String attachment;
 	private String application;
 
-	public DownloadFile(File file) {
+	public Resource(File file) {
 		this.file = file;
 	}
 
@@ -28,7 +28,7 @@ public class DownloadFile {
 		}
 	}
 
-	public DownloadFile setFileName(String fileName) {
+	public Resource setFileName(String fileName) {
 		this.fileName = fileName;
 		return this;
 	}
@@ -37,7 +37,7 @@ public class DownloadFile {
 		return attachment;
 	}
 
-	public DownloadFile setAttachment(String attachment) {
+	public Resource setAttachment(String attachment) {
 		this.attachment = attachment;
 		return this;
 	}
@@ -46,7 +46,7 @@ public class DownloadFile {
 		return application;
 	}
 
-	public DownloadFile setApplication(String application) {
+	public Resource setApplication(String application) {
 		this.application = application;
 		return this;
 	}

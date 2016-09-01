@@ -1,9 +1,11 @@
 package com.cccxm.english.model;
 
+import java.util.List;
+
+import com.cccxm.english.bean.User;
 import com.cccxm.english.contract.UserContract;
 import com.doservlet.framework.helper.DatabaseHelper;
 import com.doservlet.framework.util.CodecUtil;
-import com.doservlet.plugin.security.SecurityHelper;
 
 public class UserModel implements UserContract.IUserModel {
 
@@ -13,8 +15,11 @@ public class UserModel implements UserContract.IUserModel {
 				CodecUtil.md5(password));
 	}
 
-	public boolean login(String username, String password) {
-		return SecurityHelper.login(username, password);
+	public List<User> login(String username, String password) {
+		return DatabaseHelper.queryEntityList(User.class,
+				"select * from user where username=? and password=?", username,
+				CodecUtil.md5(password));
+		// return SecurityHelper.login(username, password);
 	}
 
 	public void setRole(int user_id, int role_id) {

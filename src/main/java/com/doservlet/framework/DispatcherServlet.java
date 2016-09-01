@@ -20,7 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.doservlet.framework.bean.Data;
-import com.doservlet.framework.bean.DownloadFile;
+import com.doservlet.framework.bean.Resource;
 import com.doservlet.framework.bean.Handler;
 import com.doservlet.framework.bean.Param;
 import com.doservlet.framework.bean.View;
@@ -112,8 +112,8 @@ public class DispatcherServlet extends HttpServlet {
 				} else if (result instanceof Data) {
 					// 返回json数据
 					handleDataResult((Data) result, request, response);
-				} else if (result instanceof DownloadFile) {
-					handleFileResult((DownloadFile) result, request, response);
+				} else if (result instanceof Resource) {
+					handleFileResult((Resource) result, request, response);
 				}
 			}else{
 				l.error("no path");
@@ -123,7 +123,7 @@ public class DispatcherServlet extends HttpServlet {
 		}
 	}
 
-	private void handleFileResult(DownloadFile result,
+	private void handleFileResult(Resource result,
 			HttpServletRequest request, HttpServletResponse response) {
 		if (result.getApplication() != null) {
 			response.setHeader("content-type",

@@ -3,9 +3,19 @@ package com.cccxm.english.bean;
 public class TongueLib {
 	private int id;
 	private String lib_name;
+	private int level;
 	private int score;
 	private String uri;
 	private int count;
+
+	
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
 
 	public int getId() {
 		return id;
